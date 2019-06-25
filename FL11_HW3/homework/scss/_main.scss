@@ -1,0 +1,272 @@
+@mixin flexible ($propertyAlign, $valueAlign) {
+    display: flex;
+    flex-direction: column;
+    #{$propertyAlign}: $valueAlign;
+}
+
+@mixin buttonJoin {
+    background: map-get($colors, buttonColor);
+    border: 1px solid map-get($colors, buttonColor);
+    border-radius: 4px;
+    width: min-content;
+    color: #ffffff;
+    font-size: 18px;
+    padding: 1% 4%;
+    white-space: nowrap;
+}
+
+@mixin logo($color) {
+    @include flexible(justify-content, center);
+    padding-left: 1%;
+    color: $color;
+    margin: 2px;
+    align-items: center;
+    font-size: 22px;
+    font-family: $familyStyle;
+    font-weight: bold;
+}
+
+body{
+    margin: 0;
+    background: map-get($colors, backgroundBody);
+}
+
+.header_heading {
+    font-weight: bold;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.header{
+    @extend body;
+    background: $backgroundHeader no-repeat;
+    background-size: cover;
+    background-position: 0 50%;
+    height: 80vh;
+    margin: auto;
+    border-bottom-right-radius: 40% 50%;
+}
+
+.header-wrap{
+    @include flexible(justify-content, space-between);
+    box-sizing: border-box;
+    height: 100%;
+    padding: 1% 10% 8%;
+
+    .landing-logo{
+        display: flex;
+
+        img{
+            height: 45px;
+            width: 45px;
+        }
+        p{
+            @include logo(map-get($colors, colorLogo));
+
+            span{
+                font-size: 10px;
+                font-weight: bold;
+            }
+        }
+    }
+
+    .header_heading{
+        position: relative;
+        width: 46%;
+        font-size: 10vh;
+        color: map-get($colors, colorLogo);
+        margin: 5vh 0 2vh;
+        opacity: 1;
+        z-index: 1;
+        max-height: 180px;
+        
+        &::before{
+            content: '';
+            position: absolute;
+            width: 55%;
+            height: 37%;
+            bottom: -26%;
+            background: linear-gradient(transparent 50%, $colorLine 50%);
+            z-index: -1;
+
+            @media (max-width: 1366px) {
+                bottom: 0%;  
+                width: 50%;
+            }
+        }
+    }
+
+    .header_text{
+        width: 50%;
+        color: map-get($colors, colorLogo);
+        font-family: 'Hind',sans-serif;
+    }
+
+    .header_button{
+        @include buttonJoin;
+    }
+}
+
+.section{
+    @include flexible(align-items, center);
+    padding: 0 10%;
+    padding-bottom: 10%;
+    position: relative;
+
+    .section_text{
+        @extend .header_heading;
+        font-size: 6vh;
+        color: map-get($colors, colorLogo);
+        z-index: 1;
+        position: relative;
+        opacity: 1;
+        width: max-content;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 45%;
+            height: 50%;
+            right: 3%;
+            bottom: 15%;
+            background: linear-gradient(transparent 50%, $colorLine 50%);
+            z-index: -1;
+        }
+    }
+
+    .section_card_wrap{
+        display: flex;
+        justify-content: space-between;
+
+        .section_card{
+            @include flexible(align-items, center);
+            width: 30%;
+            height: max-content;
+            line-height: 1.5;
+            background: map-get($colors, backgroundFoto);
+            padding: 13px;
+            border-radius: 4px;
+
+            .section_card_img{
+                width: 100%;
+                display: block;
+                height: 50%;
+                border-radius: 4px;
+            }
+
+            .section_card_heading{
+                background: linear-gradient(transparent 60%, $colorLine 50%);
+                color: #ffffff;
+                font-family: 'Source Sans Pro', sans-serif;
+                font-size: 170%;
+            }
+
+            .section_card_text{
+                text-align: center;
+                color: #c0c3ce;
+                min-height: 120px;
+            }
+        }
+    }
+}
+
+.section_banner{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 4px;
+    background: linear-gradient(45deg, map-get($colors, buttonColor), $colorLine);
+    margin: 5% 5% 0;
+    width: 70%;
+    height: 20vh;
+    position: absolute;
+    z-index: 1;
+    left: 10%;
+    bottom: -7%;
+
+    .section_banner_text_wrap{
+        display: flex;
+        flex-direction: column;
+        height: 10vh;
+        
+        .section_banner_heading{
+            @extend .header_heading;
+            color: map-get($colors, colorLogo);
+            font-size: 20px;
+            position: relative;
+            z-index: 1;
+            margin: 5% 0;
+
+            &::before{
+                content: '';
+                position: absolute;
+                width: 16%;
+                height: 65%;
+                right: 55%;
+                bottom: 7%;
+                background: linear-gradient(transparent 50%, $colorLine 50%);
+                z-index: -1;
+            }
+        }
+
+        .section_banner_text{
+            color: #c0c3ce;
+            font-size: 10px;
+            margin-top: 1%;
+            font-family: 'Source Sans Pro', sans-serif;
+        }
+    }
+
+    .section_banner_button{
+        @include buttonJoin;
+    }
+}
+
+.footer{
+    background: map-get($colors, backgroundFoto);
+    padding: 1% 10%;
+    color: #c0c3ce;
+    z-index: -1;
+    height: 25vh;
+    display: flex;
+    align-items: center;
+
+    .footer-wrap{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 55px;
+        width: 100%;
+        padding-top: 5%;
+        font-family: 'Fresca', sans-serif;
+
+        .footer_logo{
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+
+            img{
+                height: 45px;
+                width: 45px;
+            }
+
+            p{
+                @include logo(#c0c3ce);
+
+                span{
+                    color: #c0c3ce;
+                    font-size: 10px;
+                }
+            }
+        }
+
+        .footer_text {
+            width: 25%;
+            line-height: 1.7;
+
+            .footer-cr {
+                font-size: 10px;
+            }
+        }
+    }
+}
